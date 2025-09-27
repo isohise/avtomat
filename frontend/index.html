@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Альпклуб</title>
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Иконка (эмодзи-гору можно убрать/заменить) -->
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/26f0.svg" />
+</head>
+<body>
+  <!-- ВАЖНО: именно такие id, их ищет app.js -->
+  <header id="site-header" class="site-header"></header>
+
+  <main id="app-root" class="container app-root">
+    <!-- При первом старте роутер подменит на контент, пока — скелетон -->
+    <div class="view-skeleton">
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line short"></div>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer">
+    <div class="container footer-inner">
+      <span>© Альпклуб</span>
+      <span class="muted">Учебный проект</span>
+    </div>
+  </footer>
+
+  <!-- ВАЖНО: модульный скрипт -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
