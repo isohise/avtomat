@@ -1,0 +1,25 @@
+rules:
+  - id: sql-delete-without-where
+    languages: [generic]
+    message: "Dangerous SQL: DELETE statement without WHERE clause"
+    severity: ERROR
+    pattern-regex: (?is)\bDELETE\s+FROM\s+\w+\s*;
+
+  - id: sql-update-without-where
+    languages: [generic]
+    message: "Dangerous SQL: UPDATE statement without WHERE clause"
+    severity: ERROR
+    pattern-regex: (?is)\bUPDATE\s+\w+\s+SET\s+[^;]+;
+
+  - id: sql-drop-table
+    languages: [generic]
+    message: "Dangerous SQL: DROP TABLE statement"
+    severity: WARNING
+    pattern-regex: (?is)\bDROP\s+TABLE\b
+
+  - id: sql-dynamic-query
+    languages: [generic]
+    message: "Potential SQL injection risk: dynamic SQL construction"
+    severity: WARNING
+    pattern-regex: (?is)(SELECT|INSERT|UPDATE|DELETE)[\s\S]*\+\s*['"]
+
