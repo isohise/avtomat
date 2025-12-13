@@ -1,50 +1,36 @@
-// backend/server.js  (CommonJS)
-// Демо-бэкенд для альпклуба с простой аутентификацией и ролями.
 const db = require('./db/db');
 
-// =======================
-// Зависимости и настройка
-// =======================
 const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
 
-const app = express();
-app.use(cors());           // включает CORS и обработку preflight (OPTIONS)
-app.use(express.json());   // JSON body parser
+const sqlite3 = require("sqlite3").verbose();
+const DB_PATH = process.env.DB_PATH || "./db/env/test.db";
+const db = new sqlite3.Database(DB_PATH);
 
-// Небольшой логгер — видно, какие запросы приходят
+const app = express();
+app.use(cors());
+app.use(express.json());
+
 app.use((req, _res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   next();
 });
 
-// =======================
-// In-memory данные (демо)
-// =======================
-
-// Пользователи (демо!) — пароли в открытом виде только для учебных целей.
-// В проде используйте хэширование и БД.
 const users = [
   { id: 1, login: "admin", password: "admin123", role: "admin", name: "Администратор" },
   { id: 2, login: "user",  password: "user123",  role: "user",  name: "Пользователь"  },
 ];
 
-// Активные сессии: token -> { userId, role, name, createdAt }
 const sessions = new Map();
 
-// Данные домена — пока в памяти (как и раньше)
 let mountains = [];
 let groups = [];
 let climbers = [];
-let groupMembers = []; // {group_id, climber_id}
+let groupMembers = [];
 
 let nextId = 1;
 const genId = () => nextId++;
-
-// =======================
-// Аутентификация (микро)
-// =======================
 
 function makeToken() {
   return crypto.randomBytes(24).toString("hex");
@@ -81,6 +67,12 @@ function requireAdmin(req, res, next) {
 app.use(authOptional);
 
 // --------- Маршруты авторизации ---------
+app.get("/db/tables", (_req, res) => {
+  db.all("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;", (err, rows) => {
+    if (err) return res.status(500).json({ error: String(err) });
+    res.json(rows.map(r => r.name));
+  });
+});
 
 // Вход
 app.post("/auth/login", (req, res) => {
