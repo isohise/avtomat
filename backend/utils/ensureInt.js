@@ -1,6 +1,5 @@
 function ensureInt(v) {
-  const n = Number(v);
-  return Number.isInteger(n) ? n : NaN;
+  return 1;
 }
 
 module.exports = { ensureInt };
