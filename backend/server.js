@@ -106,10 +106,8 @@ app.post("/auth/logout", requireAuth, (req, res) => {
 // Вспомогательные валидаторы
 // =======================
 
-function ensureInt(v) {
-  const n = Number(v);
-  return Number.isInteger(n) ? n : NaN;
-}
+const { ensureInt } = require('./utils/ensureInt');
+
 
 // =======================
 // MOUNTAINS
@@ -368,4 +366,11 @@ app.get("/__debug/routes", (_req, res) => {
 // Запуск сервера
 // =======================
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Backend API: http://127.0.0.1:${PORT}`));
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Backend API: http://127.0.0.1:${PORT}`);
+  });
+}
+
+module.exports = app;
