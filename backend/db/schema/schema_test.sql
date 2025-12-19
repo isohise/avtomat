@@ -1,7 +1,9 @@
-CREATE TABLE notes (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  group_id INTEGER NOT NULL,
-  text TEXT NOT NULL,
-  created_at TEXT NOT NULL DEFAULT (datetime('now'))
-);
-CREATE TABLE sqlite_sequence(name,seq);
+SQLite version 3.46.1 2024-08-13 09:16:08
+Enter ".help" for usage hints.
+[?2004hsqlite> > backend/db/schema/schema_test.sql
+[?2004l[?2004h   ...> 
+[?2004l[?2004h   ...> 
+[?2004l[?2004h   ...> 
+[?2004l[?2004h   ...> 
+[?2004l[?2004h   ...> 
+[?2004l[?2004h   ...> 
