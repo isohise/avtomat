@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+#!/usr/bin/env bash
+>>>>>>> d2287e0 (Add scripts: apply SQLite migrations and deploy to STAGE with schema check)
 set -euo pipefail
 
 TEST_SSH="${TEST_SSH:?set TEST_SSH like user@test-vm}"
