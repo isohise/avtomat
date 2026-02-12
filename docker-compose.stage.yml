@@ -1,9 +1,6 @@
-version: "3.8"
-
 services:
   backend:
     build: ./backend
-    container_name: avt-stage-backend
     ports:
       - "8081:3000"
     environment:
@@ -14,7 +11,6 @@ services:
 
   db:
     image: postgres:16
-    container_name: avt-stage-db
     restart: always
     environment:
       - POSTGRES_USER=app
@@ -25,4 +21,3 @@ services:
 
 volumes:
   avt-stage-db-data:
-
