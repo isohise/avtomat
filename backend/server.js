@@ -76,6 +76,8 @@ function requireAdmin(req, res, next) {
   });
 }
 
+app.get("/", (_req, res) => res.send("Backend OK"));
+
 // Применяем authOptional на все запросы (чтобы GET знали роль при необходимости)
 app.use(authOptional);
 
